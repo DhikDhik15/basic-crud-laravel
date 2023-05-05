@@ -33,4 +33,19 @@ class LoginController extends Controller
     {
         return redirect()->intended();
     }
+
+    // API LOGIN
+    public function guestLogin(LoginRequest $request)
+    {
+        $credentials = $request->getCredentials();
+
+        if (!auth()->attempt($credentials)) {
+            return response(['error_message' => 'Incorrect Details.
+            Please try again']);
+        }
+
+        $token = auth()->user()->createToken('API Token')->accessToken;
+
+        return response(['user' => auth()->user(), 'token' => $token->token]);
+    }
 }

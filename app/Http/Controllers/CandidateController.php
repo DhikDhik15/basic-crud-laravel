@@ -110,4 +110,58 @@ class CandidateController extends Controller
             throw $th;
         }
     }
+
+    public function getCandidate()
+    {
+        try {
+            $data = $this->candidate->getAll();
+            return response([
+                'status' => 200,
+                'candidate' => $data
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function postCandidate(CandidateRequest $request)
+    {
+        try {
+            $data = $request->data();
+            $data_candidate = $this->candidate->store($data);
+            return response([
+                'status' => 200,
+                'message' => $data_candidate
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function updateCandidate(CandidateUpdateRequest $request)
+    {
+        try {
+            $data = $request->data();
+            $update = $this->candidate->update($data);
+            return response([
+                'status' => 200,
+                'message' => 'success'
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function deleteCandidate($id)
+    {
+        try {
+            $data = $this->candidate->destroy($id);
+            return response([
+                'status' => 200,
+                'message' => 'success'
+            ]);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
 }

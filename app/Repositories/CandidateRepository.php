@@ -25,7 +25,9 @@ class CandidateRepository
             'resume' => $original_name
         ];
 
-        return Candidates::create($candidate);
+        $store = Candidates::create($candidate);
+
+        return $store;
     }
 
     public function getAll()
