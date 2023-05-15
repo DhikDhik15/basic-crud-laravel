@@ -19,7 +19,9 @@ class HomeController extends Controller
 
     public function index()
     {
-        $data = $this->candidate->getAll();
+        $filters = request()->all();
+        $user = Auth::user();
+        $data = $this->candidate->getAll($filters);
         $candidates = [];
         foreach($data as $candidate) {
             $candidates[]=[
@@ -37,6 +39,6 @@ class HomeController extends Controller
         }
 
         $user = Auth::user();
-        return view('home.index', compact('candidates', 'user'));
+        return view('home.index', compact('candidates', 'user', 'data'));
     }
 }

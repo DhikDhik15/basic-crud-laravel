@@ -30,9 +30,23 @@ class CandidateRepository
         return $store;
     }
 
-    public function getAll()
+    public function getAll(array $request)
     {
-        return $model = Candidates::orderBy('id', 'DESC')->get();
+        $model = Candidates::orderBy('id');
+
+        if(isset($request['q'])) {
+            $model->where('name', 'like','%'.$request['q'].'%');
+        }
+
+        if(isset($request['sort'])) {
+            if($request['sort'] == 'name') {
+                $model->orderBy('name', 'DESC');
+            }else{
+                $model->orderBy('experience', 'DESC');
+            }
+        }
+
+        return $model->simplePaginate(3);
     }
 
     public function getById($id)
