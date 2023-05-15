@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Roles;
+use App\Models\Permissions;
 use Illuminate\Http\Request;
+use App\Models\RoleHasPermissions;
 use App\Http\Requests\RegisterRequest;
 
 class RegisterController extends Controller

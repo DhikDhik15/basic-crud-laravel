@@ -51,6 +51,17 @@
             @endif
         </div>
 
+        <div class="form-group form-floating mb-3">
+            <select class="form-select" name="access" aria-label="Default select example">
+                <option value="1">Superadmin</option>
+                <option value="2">Staff</option>
+            </select>
+            <label for="floatingPosition">Position</label>
+            @if ($errors->has('position_id'))
+                <span class="text-danger text-left">{{ $errors->first('position_id') }}</span>
+            @endif
+        </div>
+
         <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
 
         @include('auth.partials.copy')
